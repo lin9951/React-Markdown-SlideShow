@@ -2,7 +2,7 @@ React.js starter kit with Babel and Gulpfile.
 
 ## Introduction
 
-react-babel-starter is a simple biolerplate for React.js 101 training of [Mokoversity](https://www.mokoversity.com).
+# markdown編輯器
 
 ## Setup
 
