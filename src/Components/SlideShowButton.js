@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
     value: true
@@ -7,7 +7,7 @@ exports.SlideShowButton = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = require("react");
+var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -29,21 +29,30 @@ var SlideShowButton = exports.SlideShowButton = function (_Component) {
 
         _this.state = {};
 
-        //  this._handleClick = this._handleClick.bind(this);
         _this._handleClick = _this._handleClick.bind(_this);
         return _this;
     }
 
     _createClass(SlideShowButton, [{
-        key: "componentWillUnmount",
+        key: 'componentWillUnmount',
         value: function componentWillUnmount() {}
     }, {
-        key: "componentDidMount",
+        key: 'componentDidMount',
         value: function componentDidMount() {}
     }, {
-        key: "render",
+        key: '_handleClick',
+        value: function _handleClick(e) {
+            this.setState({
+                text: this.props.text
+            });
+
+            document.getElementById('source').innerHTML = this.props.text;
+            remark.create();
+        }
+    }, {
+        key: 'render',
         value: function render() {
-            return _react2.default.createElement("button", { onClick: this._handleClick }, "播放");
+            return _react2.default.createElement("button", { className: this.props.className, onClick: this._handleClick }, "播放");
         }
     }]);
 

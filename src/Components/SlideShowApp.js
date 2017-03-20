@@ -34,8 +34,8 @@ var SlideShowApp = exports.SlideShowApp = function (_Component) {
         _this.state = {
             text: ''
         };
+
         _this._handleChange = _this._handleChange.bind(_this);
-        _this._handleClick = _this._handleClick.bind(_this);
         return _this;
     }
 
@@ -55,7 +55,7 @@ var SlideShowApp = exports.SlideShowApp = function (_Component) {
     }, {
         key: 'render',
         value: function render() {
-            return _react2.default.createElement("div", null, _react2.default.createElement(_SlideShowButton.SlideShowButton, null), _react2.default.createElement("textarea", { rows: "30", onChange: this._handleChange }), _react2.default.createElement(_LivePreview.LivePreview, { text: this.state.text }));
+            return _react2.default.createElement("div", { className: "row" }, _react2.default.createElement("div", { className: "col-md-6" }, _react2.default.createElement(_SlideShowButton.SlideShowButton, { text: this.state.text, className: "btn btn-primary" }), _react2.default.createElement("textarea", { className: "form-control", rows: "25", onChange: this._handleChange })), _react2.default.createElement("div", { className: "col-md-6" }, _react2.default.createElement(_LivePreview.LivePreview, { text: this.state.text })));
         }
     }]);
 

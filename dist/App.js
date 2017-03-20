@@ -19007,7 +19007,7 @@ module.exports = validateDOMNesting;
 module.exports = require('./lib/React');
 
 },{"./lib/React":53}],159:[function(require,module,exports){
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
     value: true
@@ -19016,7 +19016,7 @@ exports.LivePreview = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = require("react");
+var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -19036,20 +19036,38 @@ var LivePreview = exports.LivePreview = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, (LivePreview.__proto__ || Object.getPrototypeOf(LivePreview)).call(this, props, context));
 
-        _this.state = {};
+        _this.state = {
+            html: ''
+        };
+
+        _this.converter = new showdown.Converter();
         return _this;
     }
 
     _createClass(LivePreview, [{
-        key: "componentWillUnmount",
+        key: 'componentWillUnmount',
         value: function componentWillUnmount() {}
     }, {
-        key: "componentDidMount",
+        key: 'componentDidMount',
         value: function componentDidMount() {}
     }, {
-        key: "render",
+        key: 'componentDidUpdate',
+        value: function componentDidUpdate(prevProps, prevState) {
+            document.getElementById('livePreview').innerHTML = this.state.html;
+        }
+    }, {
+        key: 'componentWillReceiveProps',
+        value: function componentWillReceiveProps(props) {
+            var html = this.converter.makeHtml(props.text);
+
+            this.setState({
+                html: html
+            });
+        }
+    }, {
+        key: 'render',
         value: function render() {
-            return _react2.default.createElement("div", null, this.props.text);
+            return _react2.default.createElement("div", { id: "livePreview" });
         }
     }]);
 
@@ -19096,8 +19114,8 @@ var SlideShowApp = exports.SlideShowApp = function (_Component) {
         _this.state = {
             text: ''
         };
+
         _this._handleChange = _this._handleChange.bind(_this);
-        _this._handleClick = _this._handleClick.bind(_this);
         return _this;
     }
 
@@ -19117,7 +19135,7 @@ var SlideShowApp = exports.SlideShowApp = function (_Component) {
     }, {
         key: 'render',
         value: function render() {
-            return _react2.default.createElement("div", null, _react2.default.createElement(_SlideShowButton.SlideShowButton, null), _react2.default.createElement("textarea", { rows: "30", onChange: this._handleChange }), _react2.default.createElement(_LivePreview.LivePreview, { text: this.state.text }));
+            return _react2.default.createElement("div", { className: "row" }, _react2.default.createElement("div", { className: "col-md-6" }, _react2.default.createElement(_SlideShowButton.SlideShowButton, { text: this.state.text, className: "btn btn-primary" }), _react2.default.createElement("textarea", { className: "form-control", rows: "25", onChange: this._handleChange })), _react2.default.createElement("div", { className: "col-md-6" }, _react2.default.createElement(_LivePreview.LivePreview, { text: this.state.text })));
         }
     }]);
 
@@ -19128,7 +19146,7 @@ SlideShowApp.defaultProps = {};
 //# sourceMappingURL=SlideShowApp.js.map
 
 },{"./LivePreview":159,"./SlideShowButton":161,"react":158}],161:[function(require,module,exports){
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
     value: true
@@ -19137,7 +19155,7 @@ exports.SlideShowButton = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = require("react");
+var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -19159,21 +19177,30 @@ var SlideShowButton = exports.SlideShowButton = function (_Component) {
 
         _this.state = {};
 
-        //  this._handleClick = this._handleClick.bind(this);
         _this._handleClick = _this._handleClick.bind(_this);
         return _this;
     }
 
     _createClass(SlideShowButton, [{
-        key: "componentWillUnmount",
+        key: 'componentWillUnmount',
         value: function componentWillUnmount() {}
     }, {
-        key: "componentDidMount",
+        key: 'componentDidMount',
         value: function componentDidMount() {}
     }, {
-        key: "render",
+        key: '_handleClick',
+        value: function _handleClick(e) {
+            this.setState({
+                text: this.props.text
+            });
+
+            document.getElementById('source').innerHTML = this.props.text;
+            remark.create();
+        }
+    }, {
+        key: 'render',
         value: function render() {
-            return _react2.default.createElement("button", { onClick: this._handleClick }, "播放");
+            return _react2.default.createElement("button", { className: this.props.className, onClick: this._handleClick }, "播放");
         }
     }]);
 

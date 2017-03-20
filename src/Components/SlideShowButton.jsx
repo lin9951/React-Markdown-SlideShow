@@ -7,8 +7,7 @@ export class SlideShowButton extends Component{
         this.state = {
         };
 
-        //  this._handleClick = this._handleClick.bind(this);
-        this._handleClick = this._handleClick.bind(this);
+       this._handleClick = this._handleClick.bind(this);
     }
 
     componentWillUnmount(){
@@ -17,9 +16,18 @@ export class SlideShowButton extends Component{
     componentDidMount(){
     }
 
+    _handleClick(e) { 
+        this.setState({
+            text: this.props.text
+        });
+
+        document.getElementById('source').innerHTML = this.props.text;
+        remark.create();
+    }
+    
     render(){
         return(
-            <button onClick={this._handleClick}>播放</button>
+            <button className={this.props.className} onClick={this._handleClick}>播放</button>
         );
     }
 }

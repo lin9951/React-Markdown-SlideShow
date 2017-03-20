@@ -57,7 +57,7 @@ gulp.task('todo', function () {
 // Watch Files For Changes
 gulp.task('watch', function () {
     gulp.watch(['src/**/*.jsx'], ['build']);
-    gulp.watch(['src/**/*.js'], ['todo']);
+    gulp.watch(['src/**/*.js'], ['browserify']);
 });
 
 // Default Task

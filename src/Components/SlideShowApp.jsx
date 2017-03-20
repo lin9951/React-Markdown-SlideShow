@@ -10,8 +10,8 @@ export class SlideShowApp extends Component{
         this.state = {
             text: ''
         };
+        
         this._handleChange = this._handleChange.bind(this);
-        this._handleClick = this._handleClick.bind(this);
     }
 
     componentWillUnmount(){
@@ -28,10 +28,14 @@ export class SlideShowApp extends Component{
 
     render() {
         return(
-            <div>
-                <SlideShowButton />
-                <textarea rows="30" onChange={ this._handleChange } />
-                <LivePreview text={this.state.text} />  
+            <div className="row">
+                <div className="col-md-6">
+                    <SlideShowButton text ={this.state.text} className="btn btn-primary" />
+                    <textarea className="form-control" rows="25" onChange={ this._handleChange } />
+                </div>
+                <div className="col-md-6">
+                    <LivePreview text={this.state.text} />  
+                </div>
             </div>
         );
     }
